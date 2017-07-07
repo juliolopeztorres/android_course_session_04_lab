@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="cardViewHeight">250dp</dimen>
+    <dimen name="cardViewRadius">4dp</dimen>
+
+    <dimen name="layoutHorizontalMargin">16dp</dimen>
+    <dimen name="standardPadding">5dp</dimen>
+    <dimen name="margin10">10dp</dimen>
+    <dimen name="iconStarWidth">30dp</dimen>
+
+    <dimen name="textViewDescriptionSize">12sp</dimen>
+</resources>
