@@ -13,11 +13,13 @@ public class CityAdapter extends RecyclerView.Adapter<CityViewHolder> {
     private RealmResults<City> cities;
     private int layout;
     private Activity activity;
+    private OnDeleteButtonClick listener;
 
-    public CityAdapter(RealmResults<City> cities, int layout, Activity activity) {
+    public CityAdapter(RealmResults<City> cities, int layout, Activity activity, OnDeleteButtonClick listener) {
         this.cities = cities;
         this.layout = layout;
         this.activity = activity;
+        this.listener = listener;
     }
 
     @Override
@@ -28,12 +30,16 @@ public class CityAdapter extends RecyclerView.Adapter<CityViewHolder> {
 
     @Override
     public void onBindViewHolder(CityViewHolder cityViewHolder, int position) {
-        cityViewHolder.bind(this.cities.get(position));
+        cityViewHolder.bind(this.cities.get(position), this.listener);
     }
 
     @Override
     public int getItemCount() {
         return this.cities.size();
+    }
+
+    public interface OnDeleteButtonClick {
+        void onClick(City city, int position);
     }
 
     Activity getActivity() {
