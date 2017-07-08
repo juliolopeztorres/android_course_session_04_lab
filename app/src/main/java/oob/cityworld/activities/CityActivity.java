@@ -71,13 +71,26 @@ public class CityActivity extends AppCompatActivity {
         this.realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                City cityExample = new City("Example City", "Example description", R.drawable.city, 5);
+                City cityExample = new City(
+                        "Example City",
+                        "Example description",
+                        "https://raw.githubusercontent.com/AL-Android-Course/Seccion_04_Realm_Lab/master/app/src/main/res/drawable/city.jpg",
+                        (float) 4.5);
                 realm.copyToRealm(cityExample);
             }
         });
     }
 
-    public RealmResults<City> getAllCities() {
+    private RealmResults<City> getAllCities() {
         return this.realm.where(City.class).findAll();
+    }
+
+    private void deleteAllCities() {
+        this.realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.deleteAll();
+            }
+        });
     }
 }
