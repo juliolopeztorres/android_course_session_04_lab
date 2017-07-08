@@ -16,6 +16,7 @@ public class CityActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private Realm realm;
+    private RealmResults<City> cities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,14 @@ public class CityActivity extends AppCompatActivity {
 
         this.realm = Realm.getDefaultInstance();
 
-        this.cityAdapter = new CityAdapter(this.getAllCities(), R.layout.card_view_item, this);
+        this.cities = this.getAllCities();
+
+        this.cityAdapter = new CityAdapter(cities, R.layout.card_view_item, this, new CityAdapter.OnDeleteButtonClick() {
+            @Override
+            public void onClick(City city, int position) {
+                deleteCity(city, position);
+            }
+        });
         this.layoutManager = new LinearLayoutManager(this);
 
         this.recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -32,6 +40,17 @@ public class CityActivity extends AppCompatActivity {
         this.recyclerView.setHasFixedSize(true);
         this.recyclerView.setLayoutManager(this.layoutManager);
         this.recyclerView.setAdapter(this.cityAdapter);
+    }
+
+    private void deleteCity(final City city, int position) {
+        this.realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                city.deleteFromRealm();
+            }
+        });
+
+        this.cityAdapter.notifyItemRemoved(position);
     }
 
     private void setExampleCity() {
