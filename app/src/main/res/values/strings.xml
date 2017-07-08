@@ -4,6 +4,10 @@
     <string name="city_background_description">City\'s picture</string>
     <string name="star_icon_description">Number of stars</string>
 
+    <string name="inputNameHint">Name</string>
+    <string name="inputDescriptionHint">Description</string>
+    <string name="inputBackgroundUrl">A valid url (https://)</string>
+
     <string name="positive_action_button_text_delete_city">Remove</string>
     <string name="negative_action_button_text_standard">Cancel</string>
 
