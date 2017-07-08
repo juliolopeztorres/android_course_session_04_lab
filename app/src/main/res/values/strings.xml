@@ -3,4 +3,11 @@
     <string name="btn_delete">DELETE</string>
     <string name="city_background_description">City\'s picture</string>
     <string name="star_icon_description">Number of stars</string>
+
+    <string name="positive_action_button_text_delete_city">Remove</string>
+    <string name="negative_action_button_text_standard">Cancel</string>
+
+    <string name="title_delete_city_dialog">Delete City</string>
+    <string name="meesage_delete_city_dialog">Are you sure you want to delete %1$s city?</string>
+
 </resources>

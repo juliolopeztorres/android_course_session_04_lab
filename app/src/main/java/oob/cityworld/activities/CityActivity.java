@@ -1,5 +1,6 @@
 package oob.cityworld.activities;
 
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import oob.cityworld.R;
+import oob.cityworld.Utils.Utils;
 import oob.cityworld.adapters.City.CityAdapter;
 import oob.cityworld.models.City;
 
@@ -29,8 +31,20 @@ public class CityActivity extends AppCompatActivity {
 
         this.cityAdapter = new CityAdapter(cities, R.layout.card_view_item, this, new CityAdapter.OnDeleteButtonClick() {
             @Override
-            public void onClick(City city, int position) {
-                deleteCity(city, position);
+            public void onClick(final City city, final int position) {
+                Utils.showAlertForRemovingCity(
+                        CityActivity.this,
+                        getString(R.string.title_delete_city_dialog),
+                        getString(R.string.meesage_delete_city_dialog, city.getName()),
+                        getString(R.string.positive_action_button_text_delete_city),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                deleteCity(city, position);
+                            }
+                        },
+                        getString(R.string.negative_action_button_text_standard),
+                        null
+                );
             }
         });
         this.layoutManager = new LinearLayoutManager(this);
