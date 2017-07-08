@@ -104,7 +104,7 @@
             android:layout_weight="0.2"
             android:layout_height="0dp"
             android:layout_gravity="right"
-            android:background="@android:color/white"
+            android:background="@android:color/transparent"
             android:textColor="@android:color/holo_blue_dark"
             android:text="DELETE" />
 
