@@ -1,6 +1,5 @@
 package oob.cityworld.models;
 
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -14,15 +13,13 @@ public class City extends RealmObject {
     private String name;
     @Required
     private String description;
-    @Required
     private int background;
-    @Required
     private int stars;
 
     public City() {
     }
 
-    public City(int id, String name, String description, int background, int stars) {
+    public City(String name, String description, int background, int stars) {
         this.id = MyApplication.cityId.incrementAndGet();
         this.name = name;
         this.description = description;
