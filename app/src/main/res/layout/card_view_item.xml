@@ -27,22 +27,23 @@
             android:id="@+id/cityBackground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/city" />
+            android:contentDescription="@string/city_background_description"
+            />
 
         <TextView
             android:id="@+id/cityName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="-20dp"
-            android:textColor="#FFF"
+            android:textColor="@android:color/white"
             android:textStyle="bold"
             android:paddingStart="@dimen/standardPadding"
             android:paddingLeft="@dimen/standardPadding"
-            android:shadowColor="#000"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="2"
-            android:text="Granada" />
+            android:shadowColor="@android:color/black"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            />
 
         </LinearLayout>
 
@@ -58,9 +59,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="@dimen/standardPadding"
+                android:paddingStart="@dimen/standardPadding"
                 android:maxLines="3"
                 android:maxLength="100"
-                android:text="Description" />
+                />
 
         </LinearLayout>
 
@@ -69,14 +71,18 @@
             android:layout_weight="0.1"
             android:layout_height="0dp"
             android:paddingLeft="@dimen/standardPadding"
+            android:paddingStart="@dimen/standardPadding"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/ic_star"
                 android:layout_width="@dimen/iconStarWidth"
                 android:layout_marginRight="-4dp"
+                android:layout_marginEnd="-4dp"
                 android:layout_height="match_parent"
-                android:background="@mipmap/ic_star" />
+                android:background="@mipmap/ic_star"
+                android:contentDescription="@string/star_icon_description"
+                />
 
             <TextView
                 android:id="@+id/cityStars"
@@ -84,9 +90,10 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:paddingLeft="@dimen/standardPadding"
+                android:paddingStart="@dimen/standardPadding"
                 android:textStyle="italic"
                 android:textSize="@dimen/textViewDescriptionSize"
-                android:text="4.0" />
+                />
         </LinearLayout>
 
         <View
@@ -103,10 +110,10 @@
             android:layout_width="wrap_content"
             android:layout_weight="0.2"
             android:layout_height="0dp"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:background="@android:color/transparent"
             android:textColor="@android:color/holo_blue_dark"
-            android:text="DELETE" />
+            android:text="@string/btn_delete" />
 
     </LinearLayout>
 </android.support.v7.widget.CardView>
