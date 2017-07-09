@@ -13,81 +13,92 @@
         >
 
         <ImageView
+            android:id="@+id/ImageViewCity"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.4"
             android:contentDescription="@string/city_background_description"
-            android:src="@drawable/city"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="0.6"
+            android:fillViewport="true"
             android:orientation="vertical"
-            android:layout_marginTop="20dp"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
             >
 
-            <EditText
-                android:id="@+id/inputName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/inputNameHint"
-                android:maxLength="50"
-                android:maxLines="1"
-                />
-
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:paddingBottom="30dp"
+                >
 
                 <EditText
-                    android:id="@+id/inputBackgroundUrl"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.87"
-                    android:layout_height="match_parent"
-                    android:hint="@string/inputBackgroundUrl"
-                    android:inputType="textUri"
+                    android:id="@+id/inputName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inputNameHint"
+                    android:maxLength="50"
+                    android:maxLines="1"
                     />
 
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_weight="0.13"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/ic_see_button"
-                    android:layout_marginBottom="10dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/inputBackgroundUrl"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.85"
+                        android:layout_height="match_parent"
+                        android:hint="@string/inputBackgroundUrl"
+                        android:inputType="textUri"
+                        />
+
+                    <Button
+                        android:id="@+id/btnPreviewImageViewCity"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.15"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ic_see_button"
+                        android:layout_marginBottom="10dp"
+                        />
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/inputDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inputDescriptionHint"
+                    android:maxLength="100"
+                    android:maxLines="3"
                     />
 
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:numStars="5"
+                    style="?android:attr/ratingBarStyleIndicator"
+                    android:isIndicator="false"
+                    />
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/inputDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/inputDescriptionHint"
-                android:maxLength="100"
-                android:maxLines="3"
-                />
-
-            <RatingBar
-                android:id="@+id/ratingBar"
-                android:layout_marginTop="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:numStars="5"
-                style="?android:attr/ratingBarStyleIndicator"
-                android:isIndicator="false"
-                />
-        </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
-
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabDetailCity"
