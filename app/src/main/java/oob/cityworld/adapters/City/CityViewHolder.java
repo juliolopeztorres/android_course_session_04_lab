@@ -29,7 +29,7 @@ class CityViewHolder extends RecyclerView.ViewHolder {
         this.adapter = adapter;
     }
 
-    void bind(final City city, final CityAdapter.OnDeleteButtonClick listener) {
+    void bind(final City city, final CityAdapter.OnDeleteButtonClick onDeleteListener, final CityAdapter.OnCardViewClick onCardViewListener) {
         this.cityName.setText(city.getName());
         this.cityDescription.setText(city.getDescription());
         Picasso.with(this.adapter.getActivity()).load(city.getBackground()).fit().into(this.cityBackground);
@@ -38,7 +38,14 @@ class CityViewHolder extends RecyclerView.ViewHolder {
         this.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onClick(city, getAdapterPosition());
+                onDeleteListener.onClick(city, getAdapterPosition());
+            }
+        });
+
+        this.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onCardViewListener.onClick(city);
             }
         });
     }

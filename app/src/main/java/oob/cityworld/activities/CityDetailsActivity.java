@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-
 import io.realm.Realm;
 import oob.cityworld.R;
 import oob.cityworld.Utils.Utils;
@@ -26,6 +25,7 @@ public class CityDetailsActivity extends AppCompatActivity {
     private FloatingActionButton fabDetailsCity;
 
     private Realm realm;
+    private City city;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +36,17 @@ public class CityDetailsActivity extends AppCompatActivity {
     }
 
     private void init() {
-        this.setTitle();
         this.setVariables();
+        this.setTitle();
         this.setListeners();
     }
 
     private void setTitle() {
-        setTitle(getString(R.string.add_city_title));
+        if (this.city == null) {
+            setTitle(getString(R.string.add_city_title));
+        } else {
+            setTitle(getString(R.string.edit_city_title, this.city.getName()));
+        }
     }
 
     private void setVariables() {
@@ -54,6 +58,22 @@ public class CityDetailsActivity extends AppCompatActivity {
         this.starsCity = (RatingBar) findViewById(R.id.ratingBar);
         this.btnBackgroundPreviewCity = (Button) findViewById(R.id.btnPreviewImageViewCity);
         this.fabDetailsCity = (FloatingActionButton) findViewById(R.id.fabDetailCity);
+
+        int idCity = this.getIntent().getIntExtra("id", -1);
+        this.city = this.realm.where(City.class).equalTo("id", idCity).findFirst();
+
+        if (this.city != null) {
+            this.populateValues();
+        }
+    }
+
+    private void populateValues() {
+        this.nameCity.setText(this.city.getName());
+        this.descriptionCity.setText(this.city.getDescription());
+        this.backgroundUrlCity.setText(this.city.getBackground());
+        this.starsCity.setRating(this.city.getStars());
+
+        checkAndLoadUrlCityImage();
     }
 
     private void setListeners() {
@@ -78,9 +98,11 @@ public class CityDetailsActivity extends AppCompatActivity {
     }
 
     private boolean checkEmptyInputValues() {
+        String url = this.backgroundUrlCity.getText().toString();
+
         return this.nameCity.getText().toString().isEmpty() ||
                 this.descriptionCity.getText().toString().isEmpty() ||
-                this.backgroundUrlCity.getText().toString().isEmpty();
+                (url.isEmpty() || !(url.contains("http://") || url.contains("https://")));
     }
 
     private void checkAndLoadUrlCityImage() {
@@ -93,21 +115,46 @@ public class CityDetailsActivity extends AppCompatActivity {
     }
 
     private void saveCityOnRealm() {
+        final String returnMessage = this.getReturnMessage();
         this.realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                String name = nameCity.getText().toString();
                 realm.copyToRealmOrUpdate(
-                    new City(
-                        name,
-                        descriptionCity.getText().toString(),
-                        backgroundUrlCity.getText().toString(),
-                        starsCity.getRating()
-                    )
+                    CityDetailsActivity.this.updateCityFromInputs()
                 );
-                Utils.showToast(CityDetailsActivity.this, getString(R.string.message_add_city_successfully, name));
+                Utils.showToast(CityDetailsActivity.this, returnMessage);
             }
         });
+    }
+
+    private City updateCityFromInputs() {
+        City city;
+        if (this.city == null) {
+            city = new City(
+                    nameCity.getText().toString(),
+                    descriptionCity.getText().toString(),
+                    backgroundUrlCity.getText().toString(),
+                    starsCity.getRating()
+            );
+        } else {
+            this.city.setName(this.nameCity.getText().toString());
+            this.city.setDescription(this.descriptionCity.getText().toString());
+            this.city.setBackground(this.backgroundUrlCity.getText().toString());
+            this.city.setStars(this.starsCity.getRating());
+            city = this.city;
+        }
+
+        return city;
+    }
+
+    private String getReturnMessage() {
+        String name = this.nameCity.getText().toString();
+
+        if (this.city == null) {
+            return getString(R.string.message_add_city_successfully, name);
+        }
+
+        return getString(R.string.message_update_city_successfully, name);
     }
 
     @Override
