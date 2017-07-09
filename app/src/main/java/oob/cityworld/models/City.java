@@ -13,13 +13,13 @@ public class City extends RealmObject {
     private String name;
     @Required
     private String description;
-    private int background;
-    private int stars;
+    private String background;
+    private float stars;
 
     public City() {
     }
 
-    public City(String name, String description, int background, int stars) {
+    public City(String name, String description, String background, float stars) {
         this.id = MyApplication.cityId.incrementAndGet();
         this.name = name;
         this.description = description;
@@ -47,19 +47,19 @@ public class City extends RealmObject {
         this.description = description;
     }
 
-    public int getBackground() {
+    public String getBackground() {
         return background;
     }
 
-    public void setBackground(int background) {
+    public void setBackground(String background) {
         this.background = background;
     }
 
-    public int getStars() {
+    public float getStars() {
         return stars;
     }
 
-    public void setStars(int stars) {
+    public void setStars(float stars) {
         this.stars = stars;
     }
 }
