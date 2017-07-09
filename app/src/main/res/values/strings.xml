@@ -17,7 +17,7 @@
     <string name="title_delete_city_dialog">Delete City</string>
     <string name="message_delete_city_dialog">Are you sure you want to delete %1$s city?</string>
 
-    <string name="message_empty_city_fields">One or more fields are empty. Check it out!</string>
+    <string name="message_empty_city_fields">One or more fields are empty or not valid. Check it out!</string>
     <string name="message_empty_city_background_url">You must provide a valid url (https://)</string>
     <string name="message_add_city_successfully">City %1$s added successfully</string>
     <string name="message_update_city_successfully">City %1$s updated successfully</string>

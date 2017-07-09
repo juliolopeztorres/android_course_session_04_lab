@@ -98,9 +98,11 @@ public class CityDetailsActivity extends AppCompatActivity {
     }
 
     private boolean checkEmptyInputValues() {
+        String url = this.backgroundUrlCity.getText().toString();
+
         return this.nameCity.getText().toString().isEmpty() ||
                 this.descriptionCity.getText().toString().isEmpty() ||
-                this.backgroundUrlCity.getText().toString().isEmpty();
+                (url.isEmpty() || !(url.contains("http://") || url.contains("https://")));
     }
 
     private void checkAndLoadUrlCityImage() {
