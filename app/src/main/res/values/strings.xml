@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">City World</string>
+    <string name="add_city_title">Add City</string>
+    <string name="edit_city_title">Edit city %1$s</string>
+
     <string name="btn_delete">DELETE</string>
     <string name="city_background_description">City\'s picture</string>
     <string name="star_icon_description">Number of stars</string>
@@ -12,6 +15,9 @@
     <string name="negative_action_button_text_standard">Cancel</string>
 
     <string name="title_delete_city_dialog">Delete City</string>
-    <string name="meesage_delete_city_dialog">Are you sure you want to delete %1$s city?</string>
+    <string name="message_delete_city_dialog">Are you sure you want to delete %1$s city?</string>
 
+    <string name="message_empty_city_fields">One or more fields are empty. Check it out!</string>
+    <string name="message_empty_city_background_url">You must provide a valid url (https://)</string>
+    <string name="message_add_city_successfully">City %1$s added successfully</string>
 </resources>
