@@ -9,7 +9,7 @@ import com.squareup.picasso.Picasso;
 import oob.cityworld.R;
 import oob.cityworld.models.City;
 
-class CityViewHolder extends RecyclerView.ViewHolder{
+class CityViewHolder extends RecyclerView.ViewHolder {
 
     private TextView cityName;
     private TextView cityDescription;
