@@ -13,13 +13,15 @@ public class CityAdapter extends RecyclerView.Adapter<CityViewHolder> {
     private RealmResults<City> cities;
     private int layout;
     private Activity activity;
-    private OnDeleteButtonClick listener;
+    private OnDeleteButtonClick onDeleteListener;
+    private OnCardViewClick onCardViewListener;
 
-    public CityAdapter(RealmResults<City> cities, int layout, Activity activity, OnDeleteButtonClick listener) {
+    public CityAdapter(RealmResults<City> cities, int layout, Activity activity, OnDeleteButtonClick onDeleteListener, OnCardViewClick onCardViewListener) {
         this.cities = cities;
         this.layout = layout;
         this.activity = activity;
-        this.listener = listener;
+        this.onDeleteListener = onDeleteListener;
+        this.onCardViewListener = onCardViewListener;
     }
 
     @Override
@@ -30,7 +32,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityViewHolder> {
 
     @Override
     public void onBindViewHolder(CityViewHolder cityViewHolder, int position) {
-        cityViewHolder.bind(this.cities.get(position), this.listener);
+        cityViewHolder.bind(this.cities.get(position), this.onDeleteListener, this.onCardViewListener);
     }
 
     @Override
@@ -40,6 +42,10 @@ public class CityAdapter extends RecyclerView.Adapter<CityViewHolder> {
 
     public interface OnDeleteButtonClick {
         void onClick(City city, int position);
+    }
+
+    public interface OnCardViewClick {
+        void onClick(City city);
     }
 
     Activity getActivity() {

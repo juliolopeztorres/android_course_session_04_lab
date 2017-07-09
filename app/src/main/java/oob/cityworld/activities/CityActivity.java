@@ -48,24 +48,35 @@ public class CityActivity extends AppCompatActivity implements RealmChangeListen
 
         this.cities = this.getAllCities();
 
-        this.cityAdapter = new CityAdapter(cities, R.layout.card_view_item, this, new CityAdapter.OnDeleteButtonClick() {
-            @Override
-            public void onClick(final City city, final int position) {
-                Utils.showAlertForRemovingCity(
-                        CityActivity.this,
-                        getString(R.string.title_delete_city_dialog),
-                        getString(R.string.message_delete_city_dialog, city.getName()),
-                        getString(R.string.positive_action_button_text_delete_city),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                deleteCity(city, position);
-                            }
-                        },
-                        getString(R.string.negative_action_button_text_standard),
-                        null
-                );
-            }
-        });
+        this.cityAdapter = new CityAdapter(
+                cities,
+                R.layout.card_view_item,
+                this,
+                new CityAdapter.OnDeleteButtonClick() {
+                    @Override
+                    public void onClick(final City city, final int position) {
+                        Utils.showAlertForRemovingCity(
+                                CityActivity.this,
+                                getString(R.string.title_delete_city_dialog),
+                                getString(R.string.message_delete_city_dialog, city.getName()),
+                                getString(R.string.positive_action_button_text_delete_city),
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        deleteCity(city, position);
+                                    }
+                                },
+                                getString(R.string.negative_action_button_text_standard),
+                                null
+                        );
+                    }
+                },
+                new CityAdapter.OnCardViewClick() {
+                    @Override
+                    public void onClick(City city) {
+                        loadDetailsCityActivity(city);
+                    }
+                }
+        );
         this.layoutManager = new LinearLayoutManager(this);
 
         this.recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -115,15 +126,18 @@ public class CityActivity extends AppCompatActivity implements RealmChangeListen
         this.fabAddCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadDetailsCityActivity();
+                loadDetailsCityActivity(null);
             }
         });
 
         this.cities.addChangeListener(this);
     }
 
-    private void loadDetailsCityActivity() {
+    private void loadDetailsCityActivity(City city) {
         Intent it = new Intent(this, CityDetailsActivity.class);
+        if (city != null) {
+            it.putExtra("id", city.getId());
+        }
         this.startActivity(it);
     }
 
